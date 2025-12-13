@@ -1,0 +1,16 @@
+{
+    "name": "thureins/jobportal-php",
+    "description": "A simple job portal website with vanilla PHP",
+    "authors": [
+        {
+            "name": "Thurein Soe",
+            "email": "thureinjarvis@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "App/",
+            "Framework\\": "Framework/"
+        }
+    }
+}
