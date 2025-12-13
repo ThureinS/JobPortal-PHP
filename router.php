@@ -84,9 +84,10 @@ class Router
         foreach ($this->routes as $route) {
             if ($route['uri'] == $uri && $route['method'] == $method) {
                 require basePath($route['controller']);
-            } else {
-                $this->error();
+                return;
             }
         }
+
+        $this->error();
     }
 }
