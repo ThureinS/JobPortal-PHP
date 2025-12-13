@@ -3,6 +3,8 @@
 require __DIR__ . '/../vendor/autoload.php';
 require '../helpers.php';
 
+use Framework\Router;
+
 $router = new Router();
 
 require basePath('route.php');
