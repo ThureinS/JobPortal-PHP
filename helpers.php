@@ -22,10 +22,10 @@ function basePath($path = '')
 
 function loadView($name, $data = [])
 {
-    if (file_exists(basePath("views/{$name}.view.php"))) {
+    if (file_exists(basePath("App/views/{$name}.view.php"))) {
         extract($data);
 
-        require basePath("views/{$name}.view.php");
+        require basePath("App/views/{$name}.view.php");
     } else {
         echo "View {$name} not found";
     }
@@ -42,8 +42,8 @@ function loadView($name, $data = [])
 function loadPartial($name)
 {
 
-    if (file_exists(basePath("views/partials/{$name}.php"))) {
-        require basePath("views/partials/{$name}.php");
+    if (file_exists(basePath("App/views/partials/{$name}.php"))) {
+        require basePath("App/views/partials/{$name}.php");
     } else {
         echo "Partial {$name} not found";
     }
