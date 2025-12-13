@@ -13,12 +13,16 @@ class Router
         exit;
     }
 
-    private function registerRoute($method, $uri, $controller)
+    private function registerRoute($method, $uri, $action)
     {
+
+        list($controller, $controllerMethod) = explode('@', $action);
+
         $this->routes[] = [
             'method' => 'GET',
             'uri' => $uri,
-            'controller' => $controller
+            'controller' => $controller,
+            'controllerMethod' => $controllerMethod
         ];
     }
 
@@ -85,7 +89,11 @@ class Router
     {
         foreach ($this->routes as $route) {
             if ($route['uri'] == $uri && $route['method'] == $method) {
-                require basePath('App/' . $route['controller']);
+                $controller = 'App\\Controllers\\' . $route['controller'];
+                $controllerMethod = $route['controllerMethod'];
+
+                $controllerInstance = new $controller();
+                $controllerInstance->$controllerMethod();
                 return;
             }
         }
