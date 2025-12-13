@@ -23,19 +23,6 @@ class Database
         try {
             // Create a PDO instance
             $this->conn = new PDO($dsn, $config['username'], $config['password'], $options);
-
-
-            // Set PDO to throw exceptions on error
-
-            echo "Database Connected...";
-
-
-            // You are now connected to the database, and $pdo contains the connection object
-
-
-            // You can perform database operations here
-
-
         } catch (PDOException $e) {
             // If there is an error with the connection, catch it here
             echo "Connection failed: " . $e->getMessage();
