@@ -9,8 +9,6 @@
 <!-- Top Banner -->
 <?= loadPartial('top-banner') ?>
 
-<?php inspect($listings) ?>
-
 <!-- Job Listings -->
 <section>
   <div class="container mx-auto p-4 mt-4">
