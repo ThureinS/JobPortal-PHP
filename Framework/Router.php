@@ -13,7 +13,7 @@ class Router
         list($controller, $controllerMethod) = explode('@', $action);
 
         $this->routes[] = [
-            'method' => 'GET',
+            'method' => $method,
             'uri' => $uri,
             'controller' => $controller,
             'controllerMethod' => $controllerMethod
@@ -41,9 +41,9 @@ class Router
      * @return void
      */
 
-    public function push($uri, $controller)
+    public function post($uri, $controller)
     {
-        $this->registerRoute('PUSH', $uri, $controller);
+        $this->registerRoute('POST', $uri, $controller);
     }
 
     /**
