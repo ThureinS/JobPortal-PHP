@@ -23,7 +23,7 @@ class Database
         try {
             // Create a PDO instance
             $this->conn = new PDO($dsn, $config['username'], $config['password'], $options);
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             // If there is an error with the connection, catch it here
             echo "Connection failed: " . $e->getMessage();
         }
@@ -41,13 +41,13 @@ class Database
 
             // Bind params
             foreach ($params as $param => $value) {
-                $sth->bindParam(':' . $param, $value);
+                $sth->bindValue(':' . $param, $value);
             }
 
             $sth->execute();
             return $sth;
-        } catch (PDOException $e) {
-            throw new Exception("Query failed: " . $e->getMessage());
+        } catch (\PDOException $e) {
+            throw new \Exception("Query failed: " . $e->getMessage());
         }
     }
 }
