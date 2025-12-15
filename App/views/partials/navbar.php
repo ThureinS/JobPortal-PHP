@@ -10,12 +10,11 @@ use Framework\Session;
         </h1>
         <nav class="space-x-4">
             <?php if (Session::has('user')): ?>
-
                 <div class="flex justify-between items-center gap-4">
                     <div>
                         Welcome <?= Session::get('user')['name'] ?>
                     </div>
-                    <form action="/auth/logout" method="post">
+                    <form action="/auth/logout" method="POST">
                         <button type="submit" class="text-white inline hover:underline">Logout</button>
                     </form>
                     <a
@@ -28,7 +27,6 @@ use Framework\Session;
                 <a href="/auth/login" class="text-white hover:underline">Login</a>
                 <a href="/auth/register" class="text-white hover:underline">Register</a>
             <?php endif; ?>
-
         </nav>
     </div>
 </header>

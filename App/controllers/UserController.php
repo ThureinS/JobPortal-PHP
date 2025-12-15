@@ -102,4 +102,71 @@ class UserController
 
         redirect('/');
     }
+
+    public function logout()
+    {
+        Session::clearAll();
+
+        $params = session_get_cookie_params();
+        setcookie('PHPSESSID', '', time() - 86400, $params['path'], $params['domain']);
+
+        redirect('/');
+    }
+
+    public function authenticate()
+    {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+
+        $errors = [];
+
+        if (!Validation::email($email)) {
+            $errors['email'] = 'Please enter a valid email address';
+        }
+        if (!Validation::string($password, 8, 50)) {
+            $errors['password'] = 'Password must be between 8 and 50 characters';
+        }
+
+        if (!empty($errors)) {
+            loadView('users/login', [
+                'errors' => $errors,
+                'user' => [
+                    'email' => $email,
+                ]
+            ]);
+            exit;
+        }
+
+        $params = [
+            'email' => $email
+        ];
+
+        $user = $this->db->query('SELECT * FROM users WHERE email = :email', $params)->fetch();
+
+        if (!$user) {
+            $errors['email'] = 'Invalid Credentials';
+            loadView('users/login', [
+                'errors' => $errors,
+            ]);
+            exit;
+        }
+
+        if (!password_verify($password, $user->password)) {
+            $errors['password'] = 'Invalid Credentials';
+            loadView('users/login', [
+                'errors' => $errors,
+            ]);
+            exit;
+        }
+
+        Session::set('user', [
+            'id' => $user->id,
+            'name' => $user->name,
+            'email' => $user->email,
+            'city' => $user->city,
+            'state' => $user->state,
+        ]);
+
+        redirect('/');
+    }
 }
