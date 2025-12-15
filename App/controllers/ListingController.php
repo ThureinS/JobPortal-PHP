@@ -33,6 +33,7 @@ class ListingController
     public function show($params)
     {
         $id = $params['id'];
+
         $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', [
             'id' => $id
         ])->fetch();
@@ -122,5 +123,23 @@ class ListingController
         $_SESSION['success_message'] = 'Listing deleted successfully';
 
         redirect('/listings');
+    }
+
+    public function edit($params)
+    {
+        $id = $params['id'];
+
+        $listing = $this->db->query('SELECT * FROM listings WHERE id = :id', [
+            'id' => $id
+        ])->fetch();
+
+        if (!$listing) {
+            ErrorController::notFound('Listing not found');
+            return;
+        }
+
+        loadView('listings/edit', [
+            'listing' => $listing
+        ]);
     }
 }
