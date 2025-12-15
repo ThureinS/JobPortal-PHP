@@ -145,6 +145,11 @@ class ListingController
             return;
         }
 
+        if (!Authorization::isOwner($listing->user_id)) {
+            Session::setFlashMessage('error_message', 'You are not authorized to update this listing');
+            return redirect('/listings/' . $listing->id);
+        }
+
         loadView('listings/edit', [
             'listing' => $listing
         ]);
