@@ -213,4 +213,25 @@ class ListingController
             redirect('/listings/' . $id);
         }
     }
+
+    public function search()
+    {
+        $keywords = isset($_GET['keywords']) ? $_GET['keywords'] : '';
+        $location = isset($_GET['location']) ? $_GET['location'] : '';
+
+        $query = "SELECT * FROM listings WHERE (title LIKE :keywords OR description LIKE :keywords OR company LIKE :keywords) and (city LIKE :location OR state LIKE :location)";
+
+        $params = [
+            'keywords' => "%{$keywords}%",
+            'location' => "%{$location}%"
+        ];
+
+        $listings = $this->db->query($query, $params)->fetchAll();
+
+        loadView('listings/index', [
+            'listings' => $listings,
+            'keywords' => $keywords,
+            'location' => $location
+        ]);
+    }
 }
