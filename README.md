@@ -38,7 +38,3 @@ Visit `http://localhost:8000`
 ## Documentation
 
 See [DOCS.md](DOCS.md) for architecture details, routes, and database schema.
-
-## License
-
-MIT
